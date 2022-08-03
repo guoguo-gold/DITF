@@ -8,7 +8,7 @@
 		</div>
 		<nav>
 			<ul>
-				<li v-for="item in msg">{{ item }}</li>
+				<li v-for="(item,i) in msg"><router-link :to="rout[i]">{{ item  }}<div class="xiahua"></div></router-link></li>
 			</ul>
 		</nav>
 	</div>
@@ -16,7 +16,7 @@
 
 <script setup>
 	import {
-		onMounted
+		onMounted,ref,watch
 	} from 'vue'
 	const props = defineProps({
 		msg: {
@@ -24,22 +24,32 @@
 		}
 	})
 	
+	const rout = ["/index","/history","/document","/research","/source"];
+	const index_n = ref(0); //记录当前导航i-1
+	
 	onMounted(() => {
 		var a = document.querySelectorAll("ul li");
 		for (let i = 0; i < a.length; i++) {
 			a[i].onmouseover = function() {
-				$(this).stop(true).animate({"color":"pink"},200);
+				$(this).children(":eq(0)").stop(true).animate({"color":"pink"},200);
 			}
 			a[i].onmouseout = function() {
-				$(this).stop(true).animate({"color":"rgba(0,0,0,1)"},200);
+				$(this).children(":eq(0)").stop(true).animate({"color":"rgba(0,0,0,1)"},200);
 			}
 			a[i].onclick = function() {
-				for (let i = 0; i < a.length; i++) {
-					a[i].style.boxShadow = "none"
-				}
-				this.style.boxShadow = "0px 1px 0px 0px skyblue"
+				// for (let i = 0; i < a.length; i++) {
+				// 	a[i].childNodes[1].style.display = "none";
+				// }
+				// this.childNodes[1].style.display = "block";
+				index_n.value = i;
 			}
 		}
+		watch(index_n,(nindex) => {
+			for (let i = 0; i < a.length; i++) {
+				a[i].childNodes[0].childNodes[1].style.display = "none";
+			}
+			a[nindex].childNodes[0].childNodes[1].style.display = "block";
+		})
 		
 		var t = document.querySelector(".logo");
 		t.onmouseover = function() {
@@ -51,6 +61,11 @@
 	})
 </script>
 <style scoped>
+	a{
+		display: block;
+		height: 100%;
+		width: 100%;
+	}
 	@media screen and (min-width:800px) {
 		.nav_component {
 			display: flex;
@@ -92,9 +107,9 @@
 			display: flex;
 			justify-content: center;
 			align-items: center;
-			
 		}
 		nav ul li{
+			position: relative;
 			flex-grow: 1;
 			height: 55px;
 			line-height: 55px;
@@ -102,6 +117,15 @@
 			cursor: pointer;
 			font-size: 13px;
 			user-select: none;
+		}
+		nav ul li .xiahua{
+			display: none;
+			position: absolute;
+			bottom: 2px;
+			height: 2px;
+			width: 30px;
+			border-bottom:1px solid pink;
+			left: calc(50% - 15px);
 		}
 	}
 	@media screen and (max-width:800px) {
@@ -123,7 +147,6 @@
 			display: flex;
 			justify-content: center;
 			align-items: center;
-			
 		}
 		nav ul li{
 			flex-grow: 1;

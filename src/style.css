@@ -46,46 +46,21 @@ html{
 }
 a:link{
     text-decoration:none;
+	color: black;
      /* 指正常的未被访问过的链接*/
 }
 a:visited{
     text-decoration:none;
+	color: black;
      /*指已经访问过的链接*/
-}a:hover{
+}
+a:hover{
      text-decoration:none;
+	 color: black;
      /*指鼠标在链接*/
 }
 a:active{
     text-decoration:none;
+	color: black;
     /* 指正在点的链接*/
-}
-footer{
-	position: absolute;
-	top: 2013rem;
-	height: 266rem;
-	width: 1920rem;
-	background-color:rgb(161,1,10);
-	background-size: cover;
-}
-footer .tips{
-	position:absolute;
-	top:42rem;
-	left: 360rem;
-	height: 182rem;
-	width: 478rem;
-	font-size: 20rem;
-	list-style-type: none;
-}
-footer .tips li{
-	line-height: 26rem;
-	color:rgb(255,255,255);
-}
-footer .QR{
-	position: absolute;
-	top: 59rem;
-	left: 1187rem;
-	height: 149rem;
-	width: 373rem;
-	background-image: url("../img/组 1325.png");
-	background-size: cover;
 }
