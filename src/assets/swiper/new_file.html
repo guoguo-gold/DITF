@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<link rel="stylesheet" href="swiper-bundle.min.css">
+		<script src="swiper-bundle.min.js"></script>
+		<title></title>
+		<style>
+			.swiper{
+				height: 300px;
+				width: 300px;
+			}
+			.swiper-slide{
+				text-align: center;
+				line-height: 300px;
+				color: white;
+				font-size: 16px;
+			}
+			.swiper-slide1{
+				background-color: blue;
+			}
+			.swiper-slide2{
+				background-color: red;
+			}
+			.swiper-slide3{
+				background-color: green;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="swiper" id="swiper1">
+			<div class="swiper-wrapper">
+				<div class="swiper-slide swiper-slide1">slider1</div>
+				<div class="swiper-slide swiper-slide2">slider2</div>
+				<div class="swiper-slide swiper-slide3">slider3</div>
+			</div>
+		</div>
+		<script>
+			var swiper1 = new Swiper('#swiper1',{
+				autoplay:true,
+				loop:true,
+				slidesPerView:3,
+				loopAdditionalSlides:5,
+				avigation: {
+				      nextEl: '.swiper-button-next',
+				      prevEl: '.swiper-button-prev',
+				},
+			})
+			
+		</script>
+	</body>
+</html>
