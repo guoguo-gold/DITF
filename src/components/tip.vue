@@ -13,15 +13,13 @@
    .tips{
         display: flex;
         background-color: transparent;
-        border-radius: 5px;
-        background-color: red;
+        background-color: transparent;
         border-radius: 20px;
     } 
     img{
         width: 0px;
         height: 600px;
         flex-grow: 1;
-        border-radius: 20px;
     }
     .tip{
         width:0px;
