@@ -11,16 +11,18 @@
 	<div id="swiper2" class="swiper">
 		<div class="parallax-bg" data-swiper-parallax="-13%" data-swiper-parallax-duration="3000"></div>
 		<div class="swiper-wrapper">
-			<div class="swiper-slide slide1">
+			<div class="swiper-slide slide1" data-hash="index">
 				<div class="title" data-swiper-parallax="-200" data-swiper-parallax-opacity="0.5">1</div>
 			</div>
-			<div class="swiper-slide slide2">
+			<div class="swiper-slide slide2" data-hash="index">
 				<div class="title" data-swiper-parallax="-100">1</div>
 				<div class="title" data-swiper-parallax="-200">2</div>
 				<div class="title" data-swiper-parallax="-300">3</div>
 			</div>
-			<div class="swiper-slide slide3">
+			<div class="swiper-slide slide3" data-hash="index">
 				<div class="title" data-swiper-parallax="-200">3</div>
+			</div>
+			<div class="swiper-slide slide4" data-hash="history">
 			</div>
 		</div>
 		<!-- 如果需要分页器 -->
@@ -28,7 +30,8 @@
 	</div>
 </template>
 <script setup>
-	import { onMounted,ref } from 'vue';
+	import { onMounted,ref,reactive,watch } from 'vue';
+	import router from '../router';
 	const windowWidth = ref(0);
 	const windowHeight = ref(0);
 	window.onresize = () =>{
@@ -60,8 +63,15 @@
 			mousewheel: true,
 			parallax:true,
 			speed: 1000,
+			allowTouchMove:false,
+			hashNavigation: true,
+			lazyLoading:true,
+			lazyLoadingInPrevNext:true,
+			lazyLoadingInPrevNextAmount:4,
 			pagination: {
 			  el: '.swiper-pagination',
+			  clickable: true,
+			  hideOnClick : true,
 			},
 			
 			navigation: {
@@ -73,13 +83,21 @@
 			  el: '.swiper-scrollbar',
 			},
 		}) 
+		const state = reactive({
+			render: 0
+		})//定义一个变量用来存储requestAnimationFrame
+		var slide = document.querySelectorAll(".swiper-slide");
+		var blur = 2;
+		var brightness = 50;
+
+	
 	})
 </script>
 <style scoped>
 	@media screen and (max-width:800px){
 		#swiper1{
 			width: 100%;
-			height: 1080rem
+			height: 1080rem;
 		}  
 		#swiper1 .swiper-slide{
 			background-size: cover;
@@ -108,9 +126,10 @@
 		#swiper2 .parallax-bg{
 			position: fixed;
 			height: 100%;
-			width: 3000px;
+			width: 2200px;
 			background-repeat: no-repeat;
-			background-size: auto 100%;
+			background-size: 100%;
+			filter:brightness(70%);
 			background-image: url("../assets/2.jpeg");
 		}
 		#swiper2 .swiper-slide{
@@ -118,6 +137,7 @@
 			background-repeat: no-repeat;
 			background-position: center;
 			font-size: 100px;
+			color: rgba(255,255,255,0.5);
 		}
 		#swiper2 .slide1{
 		}

@@ -18,6 +18,8 @@
 	import {
 		onMounted,ref,watch
 	} from 'vue'
+	import router from '../router/index';
+
 	const props = defineProps({
 		msg: {
 			type: Object,
@@ -26,7 +28,7 @@
 	
 	const rout = ["/index","/history","/document","/research","/source"];
 	const index_n = ref(0); //记录当前导航i-1
-	
+	const luyou = ref(router.currentRoute);
 	onMounted(() => {
 		var a = document.querySelectorAll("ul li");
 		for (let i = 0; i < a.length; i++) {
@@ -44,11 +46,21 @@
 				index_n.value = i;
 			}
 		}
-		watch(index_n,(nindex) => {
-			for (let i = 0; i < a.length; i++) {
-				a[i].childNodes[0].childNodes[1].style.display = "none";
+		// watch(index_n,(nindex) => {
+		// 	for (let i = 0; i < a.length; i++) {
+		// 		a[i].childNodes[0].childNodes[1].style.display = "none";
+		// 	}
+		// 	a[nindex].childNodes[0].childNodes[1].style.display = "block";
+		// })
+		watch(luyou,(newlu) => {
+			for(let i=0;i< rout.length;i++){
+				if(newlu.fullPath == rout[i]){
+					a[i].childNodes[0].childNodes[1].style.display = "block";
+				}
+				else{
+					a[i].childNodes[0].childNodes[1].style.display = "none";
+				}
 			}
-			a[nindex].childNodes[0].childNodes[1].style.display = "block";
 		})
 		
 		var t = document.querySelector(".logo");
