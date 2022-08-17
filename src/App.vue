@@ -17,7 +17,7 @@
 	import router from './router/index';
 	import navbian from './components/navbian.vue';
 	router.push('/index')
-	const id = ["指南", "介绍", "文档", "考据", "资源"] //nav的标题内容
+	const id = ["指南", "介绍", "工具", "考据", "资源"] //nav的标题内容
 </script>
 
 <style scoped>

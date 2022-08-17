@@ -88,8 +88,7 @@
 		})//定义一个变量用来存储requestAnimationFrame
 		var slide = document.querySelectorAll(".swiper-slide");
 		var blur = 2;
-		var brightness = 50;
-
+		var brightness = 50
 	
 	})
 </script>

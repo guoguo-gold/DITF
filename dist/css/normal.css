@@ -1,0 +1,45 @@
+*{
+	margin:0;
+	padding:0;
+}
+:root{
+	font-size: calc(100vw / 1920);
+	overflow-x: hidden;
+}
+html{
+	font-size: calc(100vw / 1920);
+	overflow-x: hidden;
+}
+.absolute{
+	position: absolute;
+}
+.pointer{
+	cursor: pointer;
+}
+.cover{
+	background-size: cover;
+}
+.nowrap{
+	white-space: nowrap;
+}
+.flex_center{
+	display: flex;
+	align-items: center;
+	justify-content:center;
+}
+.text_center{
+	text-align: center;
+}
+.flex_between{
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+.flex_center{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+.font_bold{
+	font-weight: bold;
+}
