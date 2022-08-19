@@ -1,7 +1,7 @@
 <template>
 	<div class="nav_component">
 		<div class="title">
-			<div class="logo">
+			<div class="logo" @click="drawer=true">
 				<img src="../assets/1.jpeg"/>
 				<div class="title_name">DITF</div>
 			</div>
@@ -12,6 +12,14 @@
 			</ul>
 		</nav>
 	</div>
+  <el-drawer
+      v-model="drawer"
+      title="感谢以下人员对本网站的支持"
+      direction="ltr"
+      size="15%"
+  >
+    <div v-for="item in name" style="display: flex;align-items: center"><el-avatar src="src/assets/guo.jpeg" style="margin:10px 10px"/><span>{{item}}站长</span></div>
+  </el-drawer>
 </template>
 
 <script setup>
@@ -29,7 +37,10 @@
 	const rout = ["/index","/history","/document","/research","/source"];
 	const index_n = ref(0); //记录当前导航i-1
 	const luyou = ref(router.currentRoute);
-	onMounted(() => {
+  const drawer = ref(false)
+  const name = ["果果","哈哈"]
+
+  onMounted(() => {
 		var a = document.querySelectorAll("ul li");
 		for (let i = 0; i < a.length; i++) {
 			a[i].onmouseover = function() {

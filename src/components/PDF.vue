@@ -3,7 +3,11 @@
 </template>
 
 <script>
+  export default {
+  name: "PDF"
+  }
 </script>
 
-<style>
+<style scoped>
+
 </style>
