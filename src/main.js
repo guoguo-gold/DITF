@@ -17,13 +17,41 @@ for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
 const store = createStore({
 	state(){
 		return{
-			count:0
+			count:0,
+			TabsValue:1,
+			Tabs:[
+				{
+					title: '首页',
+					name: '1',
+					closeable: false,
+					content: 'Tab 1 content',
+				},
+				{
+					title: 'Tab 1',
+					name: '2',
+					closeable: true,
+					content: 'Tab 1 content',
+				},
+				{
+					title: 'Tab 2',
+					name: '3',
+					closeable: true,
+					content: 'Tab 2 content',
+				},
+			]
 		}
 	},
 	mutations:{
 		increment(state){
 			state.count++
+		},
+		back(state){
+			state.TabsValue=1
+		},
+		addTab(state,tag){
+			state.Tabs.push(tag)
 		}
 	}
+
 })
 app.use(router).use(store).use(ElementPlus).mount('#app')

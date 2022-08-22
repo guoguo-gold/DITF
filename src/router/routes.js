@@ -7,7 +7,19 @@ const routes = [
 	{
 		path:"/history",
 		name:"history",
-		component:() => import("../views/history.vue")
+		component:() => import("../views/history.vue"),
+		children: [
+			{
+				path: 'character',
+				component:() => import("../components/character.vue"),
+				children : [
+					{
+						path: 'index',
+						component:() => import("../components/character_index.vue")
+					}
+				],
+			}
+		],
 	},
 	{
 		path:"/document",

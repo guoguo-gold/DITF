@@ -65,7 +65,7 @@
 		// })
 		watch(luyou,(newlu) => {
 			for(let i=0;i< rout.length;i++){
-				if(newlu.fullPath == rout[i]){
+				if("/"+newlu.fullPath.split("/")[1] == rout[i]){
 					a[i].childNodes[0].childNodes[1].style.display = "block";
 				}
 				else{

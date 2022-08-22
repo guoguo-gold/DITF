@@ -62,8 +62,8 @@
 			scrollbar: {
 			  el: '.swiper-scrollbar',
 			},
-		}) 
-		var mySwiper = new Swiper ('#swiper2', {
+		})
+		var mySwiper2 = new Swiper ('#swiper2', {
 			slidesPerView : 1,
 			slidesPerGroup : 1,
 			mousewheel: true,

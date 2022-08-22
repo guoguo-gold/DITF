@@ -7,7 +7,7 @@
           default-active="2"
           menu-trigger="hover"
           :collapse = "collapse"
-          router="true"
+          router
       >
         <el-sub-menu index="1">
           <template #title>

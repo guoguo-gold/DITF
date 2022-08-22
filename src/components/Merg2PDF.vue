@@ -27,7 +27,7 @@
       </div>
     </div>
   </el-upload>
-  <el-button class="hebing" type="success">
+  <el-button class="hebing" type="primary" @click="hebing">
     合并文件
   </el-button>
 </template>
@@ -70,6 +70,27 @@
         title: '上传失败',
         message: "超出数量限制，无法上传",
         type: 'error',
+      })
+    }
+    function hebing(){
+      $.ajax({
+        type:"get",
+        url:"http://127.0.0.1:5000/merg2pdf",
+        data:{
+        },
+        success:function(res){
+          console(res)
+          ElNotification({
+            type: 'success',
+            message: `合并成功，等待下载`,
+          })
+        },
+        error:function(error){
+          ElNotification({
+            type: 'error',
+            message: `合并失败`,
+          })
+        }
       })
     }
 </script>
