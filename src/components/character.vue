@@ -6,6 +6,7 @@
         type="card"
         class="demo-tabs"
         @tab-remove="removeTab"
+        @tab-click="route"
     >
       <el-tab-pane
           v-for="item in editableTabs"
@@ -16,28 +17,30 @@
       >
         <el-scrollbar style="height:calc(100vh - 56px - 200px)">
           <router-view
-              :v-loading = "loading"
-              element-loading-text="正在加载"
+              v-loading = "loading"
+              element-loading-text="正在加载wiki组件"
           >
           </router-view>
-          {{item}}
         </el-scrollbar>
       </el-tab-pane>
     </el-tabs>
   </div>
 </template>
 <script lang="ts" setup>
-import {computed, ref, watch} from 'vue'
+import {computed, onDeactivated, onMounted, onUpdated, ref, watch} from 'vue'
 import router from '../router'
 import {useStore} from 'vuex'
 const store = useStore()
 let tabIndex = 2
 const loading = ref(true)
-const editableTabsValue = String(store.state.TabsValue)
+const editableTabsValue = ref(String(store.state.TabsValue))
 const editableTabs = store.state.Tabs
 /*let good = setTimeout(()=>{
   loading.value = true
 },2000)*/
+onMounted(()=>{
+  loading.value = false
+})
 const addTab = (targetName: string) => {    //添加Tag
   const newTabName = `${++tabIndex}`
   editableTabs.value.push({
@@ -50,13 +53,25 @@ const addTab = (targetName: string) => {    //添加Tag
 }
 
 const go_back = () => {   //返回到首页
-  router.push('/history/character/index');
+  router.push('/wiki/character/index');
   store.commit("back");
+  editableTabsValue.value = "1"
 }
-const removeTab = () =>{    //移除Tag
-
+const removeTab = (targetName: string) =>{    //移除Tag
+  console.log(editableTabs)
+  store.commit("removeTab",{
+    targetName:targetName
+  })
 }
-router.push('/history/character/index');
+const route = (pane: string)=>{
+  if(pane.props.label!="首页"){
+    router.push("/wiki/character/char?c="+pane.props.label)
+  }
+  else{
+    router.push("/wiki/character/index")
+  }
+}
+router.push('/wiki/character/index');
 </script>
 <style>
 .box{

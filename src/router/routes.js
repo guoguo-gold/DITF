@@ -7,6 +7,7 @@ const routes = [
 	{
 		path:"/history",
 		name:"history",
+		alias:"/wiki",
 		component:() => import("../views/history.vue"),
 		children: [
 			{
@@ -16,6 +17,10 @@ const routes = [
 					{
 						path: 'index',
 						component:() => import("../components/character_index.vue")
+					},
+					{
+						path: 'char',
+						component:() => import("../components/char_view.vue")
 					}
 				],
 			}

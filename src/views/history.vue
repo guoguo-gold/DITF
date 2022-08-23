@@ -14,7 +14,7 @@
             <el-icon><img class="cover" style="width:100%" src="/src/assets/IMG_202208199610_png.png" /></el-icon>
             <span>原神</span>
           </template>
-          <el-menu-item index="/history/character/index">角色</el-menu-item>
+          <el-menu-item index="/wiki/character/index">角色</el-menu-item>
           <el-menu-item index="1-2" disabled>武器</el-menu-item>
           <el-menu-item index="1-3" disabled>圣遗物</el-menu-item>
         </el-sub-menu>

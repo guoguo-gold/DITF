@@ -1,7 +1,6 @@
 <template>
   <el-scrollbar
       height="calc(100vh - 56px)"
-
   >
     <div class="box">
       <el-calendar ref="va">
@@ -37,7 +36,7 @@
         <el-progress type="dashboard" :percentage="30">
           <template #default="{ percentage }">
             <span class="percentage-value">{{ percentage }}%</span>
-            <span class="percentage-label">网站完成进度</span>
+            <span class="percentage-label">wiki完成进度</span>
           </template>
         </el-progress>
       </div>

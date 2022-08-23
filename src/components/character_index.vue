@@ -1,6 +1,6 @@
 <template>
   <el-space wrap size="large">
-    <el-card class="box-card" v-for="items in character" shadow="hover" body-style="padding:0" style="cursor:pointer;" @click="zhang">
+    <el-card class="box-card" v-for="items in character" shadow="hover" body-style="padding:0" style="cursor:pointer;" @click="zhang(items)">
       <img src="../assets/1.jpeg"/>
       <div class="name">{{items}}</div>
     </el-card>
@@ -8,20 +8,18 @@
 </template>
 
 <script setup>
-import {ref} from "vue";
+import {onMounted, ref} from "vue";
 import { useStore } from 'vuex'
 
 const store = useStore()
+const character = store.state.character_card   //控制卡片数量
 
-const character = ref([1,2,3,4,5,6,7,8,9,10,2,3,4,5,6,7,8,9,10,2,3,4,5,6,7,8,9,10])
-const zhang = ()=>{
+const zhang = (items)=>{
   store.commit("addTab",{
-    tag:{
-      title: 'Tab 2',
-      name: '4',
+      title: String(items),
+      name: String(store.state.Tabindex),
       closeable: true,
       content: 'Tab 2 content',
-    }
   })
 }
 </script>

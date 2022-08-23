@@ -17,8 +17,9 @@ for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
 const store = createStore({
 	state(){
 		return{
-			count:0,
+			Tabindex:4,
 			TabsValue:1,
+			character_card:["八重神子","刻晴","魈","琴"],
 			Tabs:[
 				{
 					title: '首页',
@@ -26,30 +27,26 @@ const store = createStore({
 					closeable: false,
 					content: 'Tab 1 content',
 				},
-				{
-					title: 'Tab 1',
-					name: '2',
-					closeable: true,
-					content: 'Tab 1 content',
-				},
-				{
-					title: 'Tab 2',
-					name: '3',
-					closeable: true,
-					content: 'Tab 2 content',
-				},
 			]
 		}
 	},
 	mutations:{
-		increment(state){
-			state.count++
+		addTab(state,tag){
+			state.Tabindex++
+			state.Tabs.push(tag)
 		},
 		back(state){
-			state.TabsValue=1
+			state.TabsValue="1"
 		},
-		addTab(state,tag){
-			state.Tabs.push(tag)
+		removeTab(state,target){
+			for(let i=1;i<state.Tabs.length+1;i++){
+				if(target.targetName == state.Tabs[i-1].name){
+					state.Tabs.splice(i-1,1)
+				}
+			}
+		},
+		load_success(state){
+			state.loading = false
 		}
 	}
 

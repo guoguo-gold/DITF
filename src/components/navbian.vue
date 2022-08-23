@@ -34,7 +34,7 @@
 		}
 	})
 	
-	const rout = ["/index","/history","/document","/research","/source"];
+	const rout = ["/index","/wiki","/document","/research","/source"];
 	const index_n = ref(0); //记录当前导航i-1
 	const luyou = ref(router.currentRoute);
   const drawer = ref(false)
