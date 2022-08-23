@@ -15,13 +15,13 @@
           :label="item.title"
           :name="item.name"
       >
-        <el-scrollbar style="height:calc(100vh - 56px - 200px)">
-          <router-view
-              v-loading = "loading"
-              element-loading-text="正在加载wiki组件"
-          >
-          </router-view>
-        </el-scrollbar>
+        <div class="scroll_box">
+          <el-scrollbar style="height:100%">
+            <router-view
+            >
+            </router-view>
+          </el-scrollbar>
+        </div>
       </el-tab-pane>
     </el-tabs>
   </div>
@@ -73,7 +73,7 @@ const route = (pane: string)=>{
 }
 router.push('/wiki/character/index');
 </script>
-<style>
+<style scoped>
 .box{
   position: absolute;
   left: 350px;
@@ -81,11 +81,14 @@ router.push('/wiki/character/index');
   height: calc(100vh - 56px);
   z-index: 0;
 }
+.scroll_box{
+  height: calc(100vh - 56px - 200px);
+}
 .el-page-header{
   height: 50px;
   line-height: 50px;
 }
-.el-page-header__left:hover{
+:global(.el-page-header__left:hover){
   color: #2c8dfb;
 }
 </style>
