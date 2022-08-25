@@ -19,6 +19,7 @@ const store = createStore({
 		return{
 			Tabindex:4,
 			TabsValue:1,
+			charID:[1],
 			character_card:["八重神子","刻晴","魈","琴","刻晴","魈","琴","刻晴","魈","琴","刻晴","魈","琴","刻晴","魈","琴","刻晴","魈","琴","刻晴","魈","琴","刻晴","魈","琴","刻晴","魈","琴","刻晴","魈","琴","刻晴","魈","琴","刻晴","魈","琴","刻晴","魈","琴","刻晴","魈","琴","刻晴","魈","琴","刻晴","魈","琴","刻晴","魈","琴","刻晴","魈","琴","刻晴","魈","琴","刻晴","魈","琴","刻晴","魈","琴","刻晴","魈","琴"],
 			Tabs:[
 				{
@@ -47,6 +48,9 @@ const store = createStore({
 		},
 		load_success(state){
 			state.loading = false
+		},
+		char_push(state){
+			state.charSwiper.push(state.charSwiper[state.charSwiper.length-1]+1)
 		}
 	}
 

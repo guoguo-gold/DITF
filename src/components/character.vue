@@ -41,16 +41,6 @@ const editableTabs = store.state.Tabs
 onMounted(()=>{
   loading.value = false
 })
-const addTab = (targetName: string) => {    //添加Tag
-  const newTabName = `${++tabIndex}`
-  editableTabs.value.push({
-    title: 'New Tab',
-    name: newTabName,
-    closeable: true,
-    content: 'New Tab content',
-  })
-  editableTabsValue.value = newTabName
-}
 
 const go_back = () => {   //返回到首页
   router.push('/wiki/character/index');
@@ -58,7 +48,6 @@ const go_back = () => {   //返回到首页
   editableTabsValue.value = "1"
 }
 const removeTab = (targetName: string) =>{    //移除Tag
-  console.log(editableTabs)
   store.commit("removeTab",{
     targetName:targetName
   })
