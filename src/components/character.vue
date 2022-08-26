@@ -47,6 +47,9 @@ const go_back = () => {   //返回到首页
   store.commit("back");
   editableTabsValue.value = "1"
 }
+/*const a = router.beforeEach(async (to, from) => {
+  console.log(to)
+})*/
 const removeTab = (targetName: string) =>{    //移除Tag
   store.commit("removeTab",{
     targetName:targetName

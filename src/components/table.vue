@@ -37,11 +37,31 @@
 </template>
 
 <script setup>
-  import {onMounted, ref} from "vue";
-  import {useRouter} from 'vue-router'
+import {onMounted, ref, watch} from "vue";
+  import {useRouter, onBeforeRouteUpdate} from 'vue-router'
+  import {ElNotification} from "element-plus";
   const router = useRouter()
   const name = ref()
+
   name.value = router.currentRoute.value.query.c
+  const ajax_router = ()=>{
+    $.ajax({
+      type:'get', //请求方式
+      url:"http://127.0.0.1/DITF/character.php",  //请求地址
+      data:{
+        name:name.value
+      },
+      success:function(){
+
+      },
+      error:function(){
+        ElNotification({
+          type: 'error',
+          message: `请求失败`,
+        })
+      }
+    })
+  }
   const SpeCharacter = [
     { type: '', label: '特别认真' },
     { type: 'success', label: '责任心极强' },
@@ -49,9 +69,30 @@
     { type: 'danger', label: 'Tag 4' },
     { type: 'warning', label: 'Tag 5' },
   ]
-  const routerBefore = router.beforeEach((to, from) => {
+  ajax_router()
+  onBeforeRouteUpdate((to, from) =>{
     name.value = to.query.c
+    ajax_router()
   })
+ /* const routerBefore = router.beforeEach((to, from) => {
+    name.value = to.query.c
+    $.ajax({
+      type:'get', //请求方式
+      url:"http://127.0.0.1/DITF/character.php",  //请求地址
+      data:{
+        name:name.value
+      },
+      success:function(){
+
+      },
+      error:function(){
+        ElNotification({
+          type: 'error',
+          message: `请求失败`,
+        })
+      }
+    })
+  })*/
   const tableHover = ()=>{
     $(".table-item").hover(function(){
       $(this).stop().animate({"opacity":"0.7"},200)
