@@ -12,36 +12,17 @@
       </el-dropdown-menu>
     </template>
   </el-dropdown>
-
-  <el-carousel height="calc(100vh - 56px - 200px)" direction="vertical" :autoplay="false" loop="false">
-    <el-carousel-item>
-      <img src="../assets/2.jpeg">
-    </el-carousel-item>
-    <el-carousel-item>
-      <img src="../assets/2.jpeg">
-    </el-carousel-item>
-    <el-carousel-item>
-      <img src="../assets/2.jpeg">
-    </el-carousel-item>
-    <el-carousel-item>
-      <img src="../assets/2.jpeg">
-    </el-carousel-item>
-  </el-carousel>
+  <Table></Table>
 </template>
 
 <script setup>
 import {onMounted} from "vue";
 import {useStore} from 'vuex'
+import {useRouter} from 'vue-router'
+import Table from '../components/table.vue'
+const router = useRouter()
 const store = useStore()
 const size = "default"
-onMounted(()=> {
-  const a = document.querySelectorAll("#introduce .el-dropdown-menu__item");
-  for(let i=0;i<a.length;i++){
-    a[i].onclick = ()=>{
-      mySwiper[1].slideTo(i,1000,false)
-    }
-  }
-})
 </script>
 
 <style scoped>
@@ -49,6 +30,7 @@ onMounted(()=> {
     width: calc(50%);
   }
   .el-dropdown{
+    display: none;
     position: absolute;
     z-index: 100;
     left: calc(50vw - 200px);;
@@ -59,19 +41,6 @@ onMounted(()=> {
   .cell-item {
     display: flex;
     align-items: center;
-  }
-  .el-carousel__item {
-    position: absolute;
-    height: 100%;
-    width: 100%;
-    border-radius: 5px;
-    overflow: hidden;
-  }
-
-  .el-carousel__item img{
-    position: absolute;
-    height: 100%;
-    width: 100%;
   }
 
 </style>
