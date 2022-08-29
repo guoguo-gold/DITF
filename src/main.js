@@ -28,7 +28,8 @@ const store = createStore({
 					closeable: false,
 					content: 'Tab 1 content',
 				},
-			]
+			],
+			character:{},
 		}
 	},
 	mutations:{
@@ -49,8 +50,8 @@ const store = createStore({
 		load_success(state){
 			state.loading = false
 		},
-		char_push(state){
-			state.charSwiper.push(state.charSwiper[state.charSwiper.length-1]+1)
+		char_translate(state,jso){
+			state.character = jso
 		}
 	}
 

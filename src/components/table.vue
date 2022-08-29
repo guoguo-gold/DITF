@@ -8,15 +8,15 @@
 <template>
   <div class="table-box">
     <div class="table">
-      <div class="table-title">{{name}}</div>
+      <div class="table-title">{{char.name}}</div>
       <div class="table-row">
-        <div class="table-item"><div class="table-item-title">角色名称</div><div class="table-item-content"><span>{{ name }}</span></div></div>
-        <div class="table-item"><div class="table-item-title">人物介绍</div><div class="table-item-content"><span>content</span></div></div>
+        <div class="table-item"><div class="table-item-title">角色名称</div><div class="table-item-content"><span>{{ char.name }}</span></div></div>
+        <div class="table-item"><div class="table-item-title">人物介绍</div><div class="table-item-content"><span>{{ char.introduce }}</span></div></div>
       </div>
       <div class="table-row">
         <div class="table-item"><div class="table-item-title">人物个性</div><div class="table-item-content">
           <el-tag
-            v-for="xingge in SpeCharacter"
+            v-for="xingge in s"
             :key="xingge.label"
             :type="xingge.type"
             class="mx-1"
@@ -27,7 +27,7 @@
         </el-tag></div></div>
       </div>
       <div class="table-row">
-        <div class="table-item"><div class="table-item-title">语录</div><div class="table-item-content"><span>心有所向，日复一日，必有精进。</span></div></div>
+        <div class="table-item"><div class="table-item-title">语录</div><div class="table-item-content"><span>{{ char.spoken }}</span></div></div>
       </div>
       <div class="table-row">
         <div class="table-item tianfu"><div class="table-item-title tianfu">天赋材料</div><div class="table-item-content"><div>????</div></div></div>
@@ -37,14 +37,19 @@
 </template>
 
 <script setup>
-import {onMounted, ref, watch} from "vue";
+  import {onMounted, ref, watch} from "vue";
   import {useRouter, onBeforeRouteUpdate} from 'vue-router'
   import {ElNotification} from "element-plus";
+  import {useStore} from "vuex";
+  const store = useStore()
   const router = useRouter()
-  const name = ref()
-
-  name.value = router.currentRoute.value.query.c
-  const ajax_router = ()=>{
+  const char = ref(store.state.character)
+  let spe = char.value.special.split("???")
+  let s = ref([])
+  for(let i in spe){
+    s.value.push(eval('('+spe[i]+')'))
+  }
+/*  const ajax_router = ()=>{
     $.ajax({
       type:'get', //请求方式
       url:"http://127.0.0.1/DITF/character.php",  //请求地址
@@ -61,18 +66,15 @@ import {onMounted, ref, watch} from "vue";
         })
       }
     })
-  }
-  const SpeCharacter = [
-    { type: '', label: '特别认真' },
-    { type: 'success', label: '责任心极强' },
-    { type: 'info', label: '兽耳' },
-    { type: 'danger', label: 'Tag 4' },
-    { type: 'warning', label: 'Tag 5' },
-  ]
-  ajax_router()
+  }*/
   onBeforeRouteUpdate((to, from) =>{
-    name.value = to.query.c
-    ajax_router()
+    char.value = store.state.character
+    s.value = []
+    spe = char.value.special.split("???")
+    for(let i in spe){
+      s.value.push(eval('('+spe[i]+')'))
+    }
+    console.log(s)
   })
  /* const routerBefore = router.beforeEach((to, from) => {
     name.value = to.query.c
@@ -112,7 +114,7 @@ import {onMounted, ref, watch} from "vue";
     flex-flow:row wrap;
   }
   .table-title{
-    width: 5em;
+    width: 200px;
     height: 50px;
     line-height: 50px;
     font-size: 30px;
@@ -147,7 +149,7 @@ import {onMounted, ref, watch} from "vue";
   }
   /**/
   .table-item-title{
-    flex-grow: 1;
+    width: 200px;
     background-color: rgba(255,192,203,1);
     border-left:1px solid rgba(153,153,153,0.4);
     font-weight: bold;

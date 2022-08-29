@@ -30,6 +30,7 @@
 import {computed, onDeactivated, onMounted, onUpdated, ref, watch} from 'vue'
 import router from '../router'
 import {useStore} from 'vuex'
+import {ElNotification} from "element-plus";
 const store = useStore()
 let tabIndex = 2
 const loading = ref(true)
@@ -57,7 +58,23 @@ const removeTab = (targetName: string) =>{    //移除Tag
 }
 const route = (pane: string)=>{
   if(pane.props.label!="首页"){
-    router.push("/wiki/character/char?c="+pane.props.label)
+    $.ajax({
+      type:'get', //请求方式
+      url:"http://127.0.0.1/DITF/character.php",  //请求地址
+      data:{
+        name:pane.props.label
+      },
+      dataType:"json",
+      success:function(msg){
+        store.commit("char_translate",msg)
+      },
+      error:function(msg){
+        ElNotification({
+          type: 'error',
+          message: msg.responseText,
+        })
+      }
+    }).then(()=>{router.push("/wiki/character/char?c="+pane.props.label)})
   }
   else{
     router.push("/wiki/character/index")

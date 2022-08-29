@@ -19,7 +19,7 @@ const zhang = (items)=>{
       title: String(items),
       name: String(store.state.Tabindex),
       closeable: true,
-      content: 'Tab 2 content',
+      content: 'Tab content',
   })
 }
 </script>
