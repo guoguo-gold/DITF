@@ -17,7 +17,7 @@
       >
         <div class="scroll_box">
           <el-scrollbar style="height:100%">
-            <router-view
+            <router-view class="layui-anim layui-anim-fadein"
             >
             </router-view>
           </el-scrollbar>

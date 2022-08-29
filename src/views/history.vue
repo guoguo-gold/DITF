@@ -47,6 +47,6 @@ const collapse = ref(false)
   .el-switch{
     position: absolute;
     right: 10px;
-    top: 55px;
+    top: 0px;
   }
 </style>

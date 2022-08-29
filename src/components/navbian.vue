@@ -8,7 +8,7 @@
 		</div>
 		<nav>
 			<ul>
-				<li v-for="(item,i) in msg"><router-link :to="rout[i]">{{ item  }}<div class="xiahua"></div></router-link></li>
+        <li v-for="(item,i) in msg"><router-link :to="rout[i]">{{ item  }}<div class="xiahua"></div></router-link></li>
 			</ul>
 		</nav>
 	</div>

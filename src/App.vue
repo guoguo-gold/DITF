@@ -1,15 +1,16 @@
 <template>
 	<navbian :msg="id">
-		<template v-slot:v1></template>
-		<template v-slot:v2></template>
 	</navbian>
-	<router-view v-slot="{ Component }">
-		<Transition name="slide" appear>
-			<div>
-				<component :is="Component" />
-			</div>
-		</Transition>
-	</router-view>
+  <el-scrollbar style="height:calc(100vh - 56px)">
+    <lay-notice-bar leftIcon="layui-icon-mute" rightIcon="layui-icon-close" text="项目正在开发中。。。" mode="closeable" background="#ecf5ff"	></lay-notice-bar>
+    <router-view class="layui-anim layui-anim-fadei" v-slot="{ Component }">
+      <Transition name="slide" appear>
+        <div>
+          <component :is="Component" />
+        </div>
+      </Transition>
+    </router-view>
+  </el-scrollbar>
 </template>
 
 <script setup>

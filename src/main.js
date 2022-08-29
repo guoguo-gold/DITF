@@ -8,6 +8,8 @@ import 'element-plus/dist/index.css'
 import App from './App.vue'
 import router from './router'
 import * as ElementPlusIconsVue from '@element-plus/icons-vue'
+import layui from '@layui/layui-vue'
+import '@layui/layui-vue/lib/index.css'
 
 const app = createApp(App)
 for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
@@ -34,6 +36,11 @@ const store = createStore({
 	},
 	mutations:{
 		addTab(state,tag){
+			for(let i in state.Tabs){
+				if(state.Tabs[i].title == tag.title){
+					return false
+				}
+			}
 			state.Tabindex++
 			state.Tabs.push(tag)
 		},
@@ -56,4 +63,4 @@ const store = createStore({
 	}
 
 })
-app.use(router).use(store).use(ElementPlus).mount('#app')
+app.use(router).use(store).use(ElementPlus).use(layui).mount('#app')

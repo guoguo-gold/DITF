@@ -10,7 +10,7 @@
 <script setup>
 import {onMounted, ref} from "vue";
 import { useStore } from 'vuex'
-
+import {useRouter} from 'vue-router'
 const store = useStore()
 const character = store.state.character_card   //控制卡片数量
 
