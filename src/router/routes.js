@@ -23,6 +23,10 @@ const routes = [
 						component:() => import("../components/char_view.vue")
 					}
 				],
+			},
+			{
+				path: 'index',
+				component:() => import("../components/wiki_index.vue"),
 			}
 		],
 	},

@@ -1,5 +1,5 @@
 <template>
-  <el-space wrap size="large">
+  <el-space class="layui-anim layui-anim-fadein" wrap size="large">
     <el-card class="box-card" v-for="items in character" shadow="hover" body-style="padding:0" style="cursor:pointer;" @click="zhang(items)">
       <img src="../assets/1.jpeg"/>
       <div class="name">{{items}}</div>

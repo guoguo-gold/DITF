@@ -44,23 +44,26 @@
             <span>PPT</span>
           </template>
         </el-sub-menu>
+        <el-button text bg type="primary" :icon="iconBut" @click="shou"></el-button>
       </el-menu>
     </el-col>
   </el-row>
-  <el-switch
-      v-model="collapse"
-      inline-prompt
-      active-text="收起"
-      inactive-text="展开"
-      size = "large"
-  />
-
 </template>
 
 <script setup>
 import {ref, onMounted, onUpdated,onBeforeUpdate} from "vue";
 const collapse = ref(false)
-
+const iconBut =ref("ArrowLeft")
+const shou = ()=>{
+  if(!collapse.value) {
+    collapse.value = true
+    iconBut.value = "ArrowRight"
+  }
+  else{
+    collapse.value = false
+    iconBut.value = "ArrowLeft"
+  }
+}
 </script>
 
 <style scoped>
@@ -75,5 +78,12 @@ const collapse = ref(false)
     position: absolute;
     right: 10px;
     top: 0px;
+  }
+  .el-button{
+    position: absolute;
+    top: calc(50% - 25px);
+    right: 0px;
+    height: 50px;
+    width: 5px;
   }
 </style>

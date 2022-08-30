@@ -6,7 +6,7 @@
   table-item：单元格组件（自适应排列行）
 -->
 <template>
-  <div class="table-box">
+  <div class="table-box layui-anim layui-anim-scaleSpring">
     <div class="table">
       <div class="table-title">{{char.name}}</div>
       <div class="table-row">
@@ -74,7 +74,6 @@
     for(let i in spe){
       s.value.push(eval('('+spe[i]+')'))
     }
-    console.log(s)
   })
  /* const routerBefore = router.beforeEach((to, from) => {
     name.value = to.query.c
@@ -123,16 +122,15 @@
   .table{
     width: 800px;
     overflow: hidden;
+    border-radius:10px
   }
   /**/
   .table-row{
     display: flex;
     justify-content: space-between;
-    border-bottom: 1px solid rgba(153,153,153,0.2);
     line-height: 40px;
-  }
-  .table-row:nth-child(2){
-    border-top: 1px solid rgba(153,153,153,0.2);
+    margin: 2px;
+    border-radius: 5px;
   }
   /**/
   .table-item{
@@ -142,16 +140,17 @@
     flex-grow: 1;
     font-size: 15px;
     text-align: center;    /*规定文字是否居中*/
+    border-radius: 5px;
+    border:1px solid rgba(255,192,203,1);
+    overflow: hidden;
   }
   /**/
   .table-item:last-child{
-    border-right:1px solid rgba(153,153,153,0.4);
   }
   /**/
   .table-item-title{
     width: 200px;
     background-color: rgba(255,192,203,1);
-    border-left:1px solid rgba(153,153,153,0.4);
     font-weight: bold;
     color: rgba(255,255,255,1);
     user-select: none;
@@ -159,7 +158,6 @@
   /**/
   .table-item-content{
     flex-grow: 2;
-    border-left:1px solid rgba(153,153,153,0.4);
   }
   .tianfu{
     width: 100%;

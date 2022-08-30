@@ -2,7 +2,7 @@ import { createApp } from 'vue'
 import {
 	createStore 
 } from 'vuex'
-import ElementPlus from 'element-plus'
+import ElementPlus, {ElNotification} from 'element-plus'
 import style from './style.css'
 import 'element-plus/dist/index.css'
 import App from './App.vue'
@@ -23,6 +23,7 @@ const store = createStore({
 			TabsValue:1,
 			charID:[1],
 			character_card:["八重神子","刻晴","魈","琴","刻晴","魈","琴","刻晴","魈","琴","刻晴","魈","琴","刻晴","魈","琴","刻晴","魈","琴","刻晴","魈","琴","刻晴","魈","琴","刻晴","魈","琴","刻晴","魈","琴","刻晴","魈","琴","刻晴","魈","琴","刻晴","魈","琴","刻晴","魈","琴","刻晴","魈","琴","刻晴","魈","琴","刻晴","魈","琴","刻晴","魈","琴","刻晴","魈","琴","刻晴","魈","琴","刻晴","魈","琴","刻晴","魈","琴"],
+			progress:0,
 			Tabs:[
 				{
 					title: '首页',
@@ -38,6 +39,11 @@ const store = createStore({
 		addTab(state,tag){
 			for(let i in state.Tabs){
 				if(state.Tabs[i].title == tag.title){
+					ElNotification({
+						title: tag.title+"(已打开)",
+						message: '该角色wiki已在标签页，请在标签页中确认打开',
+						type: 'warning',
+					})
 					return false
 				}
 			}
@@ -59,6 +65,9 @@ const store = createStore({
 		},
 		char_translate(state,jso){
 			state.character = jso
+		},
+		success_progress(state,percentage){
+			state.progress = percentage
 		}
 	}
 

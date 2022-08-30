@@ -1,4 +1,5 @@
 <template>
+  <lay-progress id="Progress" percent="100" theme="blue" style="height: 2px;display: none;"></lay-progress>
 	<div class="nav_component">
 		<div class="title">
 			<div class="logo" @click="drawer=true">
@@ -12,6 +13,7 @@
 			</ul>
 		</nav>
 	</div>
+<!--  抽屉  -->
   <el-drawer
       v-model="drawer"
       title="感谢以下人员对本网站的支持"
@@ -27,19 +29,22 @@
 		onMounted,ref,watch
 	} from 'vue'
 	import router from '../router/index';
+  import {useStore}  from "vuex";
 
-	const props = defineProps({
+  const props = defineProps({
 		msg: {
 			type: Object,
 		}
 	})
-	
-	const rout = ["/index","/wiki","/document","/research","/source"];
+  const store = useStore()
+	const rout = ["/index","/wiki/index","/document","/research","/source"] //真
+  const routes = ["/index","/wiki","/document","/research","/source"]  //假
 	const index_n = ref(0); //记录当前导航i-1
 	const luyou = ref(router.currentRoute);
   const drawer = ref(false)
   const name = ["果果","哈哈"]
 
+  //生命周期
   onMounted(() => {
 		var a = document.querySelectorAll("ul li");
 		for (let i = 0; i < a.length; i++) {
@@ -65,14 +70,41 @@
 		// })
 		watch(luyou,(newlu) => {
 			for(let i=0;i< rout.length;i++){
-				if("/"+newlu.fullPath.split("/")[1] == rout[i]){
+				if("/"+newlu.fullPath.split("/")[1] == routes[i]){
 					a[i].childNodes[0].childNodes[1].style.display = "block";
 				}
 				else{
 					a[i].childNodes[0].childNodes[1].style.display = "none";
 				}
 			}
+
 		})
+    let progress_an
+    var progress= document.getElementById("Progress")
+/*    router.beforeEach((to, from) => {
+      // ...
+      // 返回 false 以取消导航
+      let p_width = 0
+      clearInterval(progress_an)
+      progress.style.display="block"
+      progress.children[0].style.width = 0
+      progress_an = setInterval(()=>{
+        progress.children[0].style.width = "10%"
+        if(store.state.progress==100){
+          progress.children[0].style.width = String(store.state.progress)+"%"
+          store.commit("success_progress",0)
+          clearInterval(progress_an)
+        }
+        // console.log("no_ok")
+      },1000/60)
+      /!*      progress_an = setInterval(()=>{
+        p_width+=(Math.random(10))
+        progress.children[0].style.width = String(p_width)+"%"
+        if(p_width>=100){
+          clearInterval(progress_an)
+        }
+      },500)*!/
+    })*/
 		
 		var t = document.querySelector(".logo");
 		t.onmouseover = function() {
@@ -89,6 +121,11 @@
 		height: 100%;
 		width: 100%;
 	}
+  .layui-progress{
+    position: fixed;
+    width: calc(100vw);
+    height: 2px;
+  }
 	@media screen and (min-width:800px) {
 		.nav_component {
 			display: flex;
@@ -116,7 +153,7 @@
 			font-weight: bold;
 			color: transparent;
 			background:-webkit-linear-gradient(220deg,pink 25%,skyblue);
-			-webkit-background-clip: text;
+			-webkit-background-clip: text !important;
 		}
 		.title div img{
 			height: 50px;

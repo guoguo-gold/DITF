@@ -9,6 +9,7 @@
 * vite+vue3
 * ElementUI
 * layUI
+* swiper
 * xammp(宝塔)
 * mysql
 * php

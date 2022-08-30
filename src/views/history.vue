@@ -18,22 +18,29 @@
           <el-menu-item index="1-2" disabled>武器</el-menu-item>
           <el-menu-item index="1-3" disabled>圣遗物</el-menu-item>
         </el-sub-menu>
+        <el-button text bg type="primary" :icon="iconBut" @click="shou"></el-button>
       </el-menu>
     </el-col>
   </el-row>
-  <el-switch
-      v-model="collapse"
-      active-text="收起"
-      inactive-text="展开"
-      inline-prompt
-      size="large"
-  />
 </template>
 
 <script setup>
 import {ref, onMounted, onUpdated,onBeforeUpdate} from "vue";
+import {useRouter} from "vue-router";
+const iconBut = ref("ArrowLeft")
 const collapse = ref(false)
-
+const router = useRouter()
+router.push("/wiki/index")
+const shou = ()=>{
+  if(!collapse.value) {
+    collapse.value = true
+    iconBut.value = "ArrowRight"
+  }
+  else{
+    collapse.value = false
+    iconBut.value = "ArrowLeft"
+  }
+}
 </script>
 
 <style scoped>
@@ -44,9 +51,11 @@ const collapse = ref(false)
   .el-col ul{
     height: calc(100vh - 56px);
   }
-  .el-switch{
+  .el-button{
     position: absolute;
-    right: 10px;
-    top: 0px;
+    top: calc(50% - 25px);
+    right: 0px;
+    height: 50px;
+    width: 5px;
   }
 </style>

@@ -17,8 +17,7 @@
       >
         <div class="scroll_box">
           <el-scrollbar style="height:100%">
-            <router-view class="layui-anim layui-anim-fadein"
-            >
+            <router-view>
             </router-view>
           </el-scrollbar>
         </div>
@@ -66,6 +65,7 @@ const route = (pane: string)=>{
       },
       dataType:"json",
       success:function(msg){
+
         store.commit("char_translate",msg)
       },
       error:function(msg){

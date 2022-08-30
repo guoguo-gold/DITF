@@ -64,3 +64,6 @@ a:active{
 	color: black;
     /* 指正在点的链接*/
 }
+.layui-progress-bar{
+	height: 2px !important;
+}
