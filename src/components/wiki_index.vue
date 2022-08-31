@@ -29,7 +29,7 @@
         </lay-carousel-item>
       </lay-carousel>
       <div class="content layui-anim layui-anim-upbit">
-        <lay-field v-for="field in legend" :title="field.title"><div>aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</div></lay-field>
+        <lay-field v-for="field in legend" :title="field.title"><div class="box"></div></lay-field>
       </div>
     </el-scrollbar>
   </div>
@@ -113,10 +113,7 @@ onMounted(()=>{
     justify-content: flex-start;
     margin: 5px 5px 0 5px;
   }
-  :global(.layui-field-box){
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    width: calc(100% - 200px);
+  .box{
+    height: 1000px;
   }
 </style>
