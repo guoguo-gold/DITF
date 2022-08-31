@@ -9,6 +9,10 @@
           menu-trigger="hover"
           router
       >
+        <el-menu-item index="/wiki/index">
+          <el-icon><House /></el-icon>
+          <template #title>首页</template>
+        </el-menu-item>
         <el-sub-menu index="1">
           <template #title>
             <el-icon><img class="cover" style="width:100%" src="/src/assets/IMG_202208199610_png.png" /></el-icon>
