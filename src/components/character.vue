@@ -65,13 +65,12 @@ const route = (pane: string)=>{
       },
       dataType:"json",
       success:function(msg){
-
         store.commit("char_translate",msg)
       },
       error:function(msg){
         ElNotification({
           type: 'error',
-          message: msg.responseText,
+          message: msg.responseText ? msg.responseText:"获取数据库失败",
         })
       }
     }).then(()=>{router.push("/wiki/character/char?c="+pane.props.label)})

@@ -1,10 +1,22 @@
 <template>
   <div class="game_box">
     <el-scrollbar>
-      <lay-select v-model="value">
-        <lay-select-option v-for="item in game" :value=item.value :label=item.label></lay-select-option>
-      </lay-select>
-      <lay-carousel v-model="active1">
+      <div class="menu">
+        <lay-select v-model="value">
+          <lay-select-option v-for="item in game" :value=item.value :label=item.label></lay-select-option>
+        </lay-select>
+        <lay-dropdown updateAtScroll>
+          <lay-ripple><lay-button>版本选择</lay-button></lay-ripple>
+        <template #content>
+          <lay-dropdown-menu>
+            <lay-dropdown-menu-item>3.2</lay-dropdown-menu-item>
+            <lay-dropdown-menu-item>3.1</lay-dropdown-menu-item>
+            <lay-dropdown-menu-item>3.0</lay-dropdown-menu-item>
+          </lay-dropdown-menu>
+        </template>
+        </lay-dropdown>
+      </div>
+      <lay-carousel class="layui-anim layui-anim-upbit" v-model="active1">
         <lay-carousel-item id="1">
           <div style="color: white;text-align: center;width:100%;height:300px;line-height:300px;background-color:#009688;">条目一</div>
         </lay-carousel-item>
@@ -18,6 +30,17 @@
           <div style="color: white;text-align: center;width:100%;height:300px;line-height:300px;background-color:#FF5722;">条目四</div>
         </lay-carousel-item>
       </lay-carousel>
+      <div class="content">
+        <lay-field title="版本热点">
+          <div></div>
+        </lay-field>
+        <lay-field title="热门视频">
+          <div></div>
+        </lay-field>
+        <lay-field title="攻略合集">
+          <div></div>
+        </lay-field>
+      </div>
     </el-scrollbar>
   </div>
 </template>
@@ -48,10 +71,6 @@ watch(value,(newvalue)=>{
   .el-scrollbar{
     height: 100%;
     width: 100%;
-    padding: 10px 30px;
-  }
-  .hezi{
-    height:10000px;
   }
   .edition{
     width: 100%;
@@ -59,11 +78,15 @@ watch(value,(newvalue)=>{
     line-height: 50px;
   }
   .content{
-    display: flex;
-    justify-content: center;
-    width: 100%;
+    margin: 50px 100px;
   }
   .layui-unselect{
-    margin: 0 0 10px 0;
+    width: 150px;
+    text-align: center;
+  }
+  .menu{
+    display: flex;
+    justify-content: flex-start;
+    margin: 5px 5px 0 5px;
   }
 </style>

@@ -13,7 +13,7 @@
 </template>
 
 <script setup>
-	import {ref,watch} from 'vue';
+	import {ref,watch,onMounted} from 'vue';
 	import router from './router/index';
 	import navbian from './components/navbian.vue';
 	router.push('/index')
