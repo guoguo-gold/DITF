@@ -41,6 +41,11 @@ html{
 	justify-content: center;
 	align-items: center;
 }
+.flex_around{
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+}
 .font_bold{
 	font-weight: bold;
 }

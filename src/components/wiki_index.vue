@@ -41,9 +41,14 @@
                   <lay-empty v-if="i.img==''" description="暂无封面"></lay-empty>
                   <img v-else class="absolute" :src="i.img" />
                   <div class="no_hov absolute">
-                    <div class="head"></div>
-                      <lay-icon size="30px" type="layui-icon-praise" color="white"></lay-icon><lay-icon size="30px" type="layui-icon-tread" color="white"></lay-icon>
-                    <div class="foot"></div>
+                    <div class="head absolute"><strong>{{i.title}}</strong></div>
+                    <div class="evaluate flex_around">
+                      <lay-icon size="30px" type="layui-icon-praise" color="white"></lay-icon><lay-icon type="layui-icon-layer" size="30px" color="white"></lay-icon><lay-icon size="30px" type="layui-icon-tread" color="white"></lay-icon>
+                    </div>
+                    <div class="foot absolute flex_between">
+                      <span>发布日期：{{i.time}}</span>
+                      <span>作者：{{i.author}}</span>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -67,28 +72,46 @@ const value = ref("1")
 //content菜单
 const hot = [
   {
-    label:"1",
-    img:"/src/assets/2.jpeg",
+    index:1,
+    title:"版本前瞻",
+    img:"",
+    time:"4-26",
+    author:"DITF",
   },
   {
-    label:"2",
+    index:2,
+    title:"版本前瞻",
     img:"",
+    time:"4-26",
+    author:"DITF",
   },
   {
-    label:"3",
+    index:3,
+    title:"版本前瞻",
     img:"",
+    time:"4-26",
+    author:"DITF",
   },
   {
-    label:"4",
+    index:4,
+    title:"版本前瞻",
     img:"",
+    time:"4-26",
+    author:"DITF",
   },
   {
-    label:"5",
+    index:5,
+    title:"版本前瞻",
     img:"",
+    time:"4-26",
+    author:"DITF",
   },
   {
-    label:"6",
+    index:6,
+    title:"版本前瞻",
     img:"",
+    time:"4-26",
+    author:"DITF",
   },
 ],vid = [],wal = []
 const options = [
@@ -139,6 +162,15 @@ onMounted(()=>{
       nextEl: '.swiper-button-next',
       prevEl: '.swiper-button-prev',
     },
+  })
+  $(".no_hov").hover(function (){
+    $(this).stop().animate({opacity:1},200,()=>{
+      $(this).children(".head").animate({top:0},200)
+    })
+  },function (){
+    $(this).stop().animate({opacity:0},200,()=>{
+      $(this).children(".head").animate({top:"-50rem"},200)
+    })
   })
 })
 </script>
@@ -210,6 +242,27 @@ onMounted(()=>{
     display: flex;
     justify-content: center;
     align-items: center;
+    opacity: 0;
+    cursor: pointer;
+  }
+  .no_hov .head{
+    top: -50rem;
+    width: 100%;
+    height: 50rem;
+    color: white;
+    font-size: 20px;
+    line-height: 50rem;
+    text-indent: 20rem;
+  }
+  .no_hov .foot{
+    bottom: 0;
+    width: 100%;
+    height: 30rem;
+    color: white;
+    line-height: 30rem;
+  }
+  .no_hov .foot span{
+    margin: 0 10px
   }
   .swiper-slide-active{ /*焦点角色*/
 
@@ -219,8 +272,7 @@ onMounted(()=>{
     --swiper-navigation-color: rgba(255,192,203,1);/* 单独设置按钮颜色 */
     --swiper-navigation-size: 20px;/* 设置按钮大小 */
   }
-  .layui-icon{
-    margin: 0 50px;
-    cursor: pointer;
+  .evaluate{
+    width: 100%;
   }
 </style>
