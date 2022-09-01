@@ -1,5 +1,5 @@
 <template>
-  <div class="game_box">
+  <div class="game_box layui-anim layui-anim-upbit">
     <el-scrollbar>
       <div class="menu">
         <lay-select v-model="value">
@@ -14,30 +14,83 @@
           </template>
         </lay-dropdown>
       </div>
-      <lay-carousel class="layui-anim layui-anim-upbit" v-model="active1">
+<!--轮播图-->
+      <lay-carousel v-model="active1">
         <lay-carousel-item id="1">
-          <div style="color: white;text-align: center;width:100%;height:300px;line-height:300px;background-color:#009688;">条目一</div>
+          <lay-empty description="暂无图片"></lay-empty>
         </lay-carousel-item>
         <lay-carousel-item id="2">
-          <div style="color: white;text-align: center;width:100%;height:300px;line-height:300px;background-color:#5FB878;">条目二</div>
+          <lay-empty description="暂无图片"></lay-empty>
         </lay-carousel-item>
         <lay-carousel-item id="3">
-          <div style="color: white;text-align: center;width:100%;height:300px;line-height:300px;background-color:#FFB800;">条目三</div>
+          <lay-empty description="暂无图片"></lay-empty>
         </lay-carousel-item>
         <lay-carousel-item id="4">
-          <div style="color: white;text-align: center;width:100%;height:300px;line-height:300px;background-color:#FF5722;">条目四</div>
+          <lay-empty description="暂无图片"></lay-empty>
         </lay-carousel-item>
       </lay-carousel>
+<!--content-->
       <div class="content layui-anim layui-anim-upbit">
-        <lay-field v-for="field in legend" :title="field.title"><div class="box"></div></lay-field>
+        <lay-field title="版本热点"></lay-field>
+        <lay-empty v-if="hot.length==0"></lay-empty>
+        <div v-else>
+          <div class="swiper" id="swiper3">
+            <div class="swiper-wrapper">
+              <div class="swiper-slide" v-for="i in hot">
+                <div class="card">
+                  <lay-empty v-if="i.img==''" description="暂无封面"></lay-empty>
+                  <img v-else class="absolute" :src="i.img" />
+                  <div class="no_hov absolute">
+                    <div class="head"></div>
+                      <lay-icon size="30px" type="layui-icon-praise" color="white"></lay-icon><lay-icon size="30px" type="layui-icon-tread" color="white"></lay-icon>
+                    <div class="foot"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="swiper-button-prev"></div><!--左箭头。如果放置在swiper外面，需要自定义样式。-->
+            <div class="swiper-button-next"></div><!--右箭头。如果放置在swiper外面，需要自定义样式。-->
+          </div>
+        </div>
+        <lay-field title="热门视频"></lay-field>
+        <lay-empty v-if="vid.length==0"></lay-empty>
+        <lay-field title="攻略合集"></lay-field>
+        <lay-empty  v-if="wal.length==0"></lay-empty>
       </div>
     </el-scrollbar>
   </div>
 </template>
 
 <script setup>
-import {onMounted, ref, watch} from 'vue'
+import {nextTick,onMounted, ref, watch} from 'vue'
 const value = ref("1")
+//content菜单
+const hot = [
+  {
+    label:"1",
+    img:"/src/assets/2.jpeg",
+  },
+  {
+    label:"2",
+    img:"",
+  },
+  {
+    label:"3",
+    img:"",
+  },
+  {
+    label:"4",
+    img:"",
+  },
+  {
+    label:"5",
+    img:"",
+  },
+  {
+    label:"6",
+    img:"",
+  },
+],vid = [],wal = []
 const options = [
   {
     value:1,
@@ -54,17 +107,14 @@ const options = [
     ],
   }
 ]
-const game = [                                //菜单下拉框
+//菜单下拉框
+const game = [
   {value:"1",label:"原神"},
   {value:"2",label:"碧蓝航线"},
   {value:"3",label:"明日方舟"}
 ]
-const legend = ref([                    //content菜单
-  {title:"版本热点"},
-  {title:"热门视频"},
-  {title:"攻略合集"},
-])
-const edition = [                             //版本下拉框菜单
+//版本下拉框菜单
+const edition = [
   {title:"3.2",isnew:true},
   {title:"3.1",isnew:false},
   {title:"3.0",isnew:false},
@@ -75,9 +125,21 @@ watch(value,(newvalue)=>{
 })
 onMounted(()=>{
   var field =document.getElementsByTagName("legend")
-  field[0].innerHTML = "<i class='layui-icon layui-icon-fire'></i>&nbsp<a name='docend'>"+field[0].textContent+"</a>"
-  field[1].innerHTML = "<i class='layui-icon layui-icon-star'></i>&nbsp<a name='docend'>"+field[1].textContent+"</a>"
-  field[2].innerHTML = "<i class='layui-icon layui-icon-star-fill'></i>&nbsp<a name='docend'>"+field[2].textContent+"</a>"
+  field[0].innerHTML = "<i class='layui-icon layui-icon-fire' style='color:red'></i>&nbsp<a name='docend'>"+field[0].textContent+"</a>"
+  field[1].innerHTML = "<i class='layui-icon layui-icon-star' style='color:red'></i>&nbsp<a name='docend'>"+field[1].textContent+"</a>"
+  field[2].innerHTML = "<i class='layui-icon layui-icon-star-fill' style='color:rgb(255,192,0)'></i>&nbsp<a name='docend'>"+field[2].textContent+"</a>"
+  //热点轮播
+  var myswiper3 = new Swiper("#swiper3",{
+    slidesPerView:3,  //可视数量
+    spaceBetween:0,  //间距
+    loop: true, // 循环模式选项
+/*    centeredSlides: true,   //开启焦点
+    centeredSlidesBounds: true,*/
+    navigation:{
+      nextEl: '.swiper-button-next',
+      prevEl: '.swiper-button-prev',
+    },
+  })
 })
 </script>
 
@@ -106,7 +168,7 @@ onMounted(()=>{
   .layui-unselect{
     width: 150px;
     text-align: center;
-    margin: 0 10px 0 0;
+    margin: 0 5px 0 0;
   }
   .menu{
     display: flex;
@@ -115,5 +177,50 @@ onMounted(()=>{
   }
   .box{
     height: 1000px;
+  }
+  .layui-carousel li{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  #swiper3 .swiper-slide{
+    height: 300rem;
+  }
+  #swiper3 .swiper-slide .card{
+    position: relative;
+    height: calc(100% - 10px);
+    width: calc(100% - 60px);
+    margin: 5px 30px;
+    border-radius: 5px;
+    box-shadow: 1px 1px 5px 1px rgba(0,0,0,0.1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+  }
+  #swiper3 .swiper-slide .card img{
+    height: 100%;
+    width: 100%;
+  }
+  #swiper3 .swiper-slide .no_hov{
+    height: 100%;
+    width: 100%;
+    background-color: rgba(0,0,0,0.1);
+    z-index: 100;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .swiper-slide-active{ /*焦点角色*/
+
+  }
+  .swiper{
+    --swiper-theme-color: #ff6600;/* 设置Swiper风格 */
+    --swiper-navigation-color: rgba(255,192,203,1);/* 单独设置按钮颜色 */
+    --swiper-navigation-size: 20px;/* 设置按钮大小 */
+  }
+  .layui-icon{
+    margin: 0 50px;
+    cursor: pointer;
   }
 </style>
