@@ -3,7 +3,7 @@
     <el-scrollbar>
       <div class="menu">
         <lay-select v-model="value">
-          <lay-select-option v-for="item in game" :value=item.value :label=item.label></lay-select-option>
+          <lay-select-option @click="getGame(item)" v-for="item in game" :value=item.value :label=item.label></lay-select-option>
         </lay-select>
         <lay-dropdown updateAtScroll>
           <lay-ripple><lay-button>版本选择<lay-badge style="position:absolute;top:5px;right:5px" type="dot" theme="blue" ripple></lay-badge></lay-button></lay-ripple>
@@ -68,7 +68,51 @@
 
 <script setup>
 import {nextTick,onMounted, ref, watch} from 'vue'
-const value = ref("1")
+import {ElNotification} from "element-plus";
+const value = ref("0")
+//版本下拉框菜单
+const edition = ref([])
+//菜单下拉框
+const game = [
+  {value:"1",label:"原神"},
+  {value:"2",label:"碧蓝航线"},
+  {value:"3",label:"明日方舟"}
+]
+watch(value,()=>{
+  edition.value = []
+})
+const getGame = (item)=>{
+  $.ajax({
+    type:'get', //请求方式
+    url:"http://127.0.0.1/DITF/wikiIndex.php",  //请求地址
+    data:{
+      game:item.label
+    },
+    dataType:"json",
+    success:function(msg){
+      let arr = msg.edition.split(",")
+      let is_new = msg.isnew_edition.split(",")
+      for(let i in arr){
+        let a
+        if(is_new[i].length == 5){
+          a = false
+        }
+        else{
+          a = true
+        }
+        edition.value.push({title:arr[i],isnew:a})
+      }
+    },
+    error:function(msg){
+      ElNotification({
+        type: 'error',
+        message: msg.responseText ? msg.responseText:"获取数据库失败",
+      })
+      value.value = 0
+    }
+  })
+}
+
 //content菜单
 const hot = [
   {
@@ -130,18 +174,7 @@ const options = [
     ],
   }
 ]
-//菜单下拉框
-const game = [
-  {value:"1",label:"原神"},
-  {value:"2",label:"碧蓝航线"},
-  {value:"3",label:"明日方舟"}
-]
-//版本下拉框菜单
-const edition = [
-  {title:"3.2",isnew:true},
-  {title:"3.1",isnew:false},
-  {title:"3.0",isnew:false},
-]
+
 const active1 = ref("1")
 watch(value,(newvalue)=>{
   console.log()
