@@ -22,9 +22,17 @@ const store = createStore({
 			Tabindex:4,
 			TabsValue:1,
 			charID:[1],
-			character_card:["八重神子","刻晴","魈","琴","刻晴","魈","琴","刻晴","魈","琴","刻晴","魈","琴","刻晴","魈","琴","刻晴","魈","琴","刻晴","魈","琴","刻晴","魈","琴","刻晴","魈","琴","刻晴","魈","琴","刻晴","魈","琴","刻晴","魈","琴","刻晴","魈","琴","刻晴","魈","琴","刻晴","魈","琴","刻晴","魈","琴","刻晴","魈","琴","刻晴","魈","琴","刻晴","魈","琴","刻晴","魈","琴","刻晴","魈","琴","刻晴","魈","琴"],
+			character_card:["八重神子","刻晴","魈","琴","胡桃","刻晴","魈","琴","刻晴","魈","琴","刻晴","魈","琴","刻晴","魈","琴","刻晴","魈","琴","刻晴","魈","琴","刻晴","魈","琴","刻晴","魈","琴","刻晴","魈","琴","刻晴","魈","琴","刻晴","魈","琴","刻晴","魈","琴","刻晴","魈","琴","刻晴","魈","琴","刻晴","魈","琴","刻晴","魈","琴","刻晴","魈","琴","刻晴","魈","琴","刻晴","魈","琴","刻晴","魈","琴","刻晴","魈","琴"],
 			progress:0,
 			Tabs:[
+				{
+					title: '首页',
+					name: '1',
+					closeable: false,
+					content: 'Tab 1 content',
+				},
+			],
+			attributeTabs:[
 				{
 					title: '首页',
 					name: '1',
@@ -50,6 +58,20 @@ const store = createStore({
 			state.Tabindex++
 			state.Tabs.push(tag)
 		},
+		addAttributeTab(state,tag){
+			for(let i in state.attributeTabs){
+				if(state.attributeTabs[i].title == tag.title){
+					ElNotification({
+						title: tag.title+"(已打开)",
+						message: '该角色模拟器已在标签页，请在标签页中确认打开',
+						type: 'warning',
+					})
+					return false
+				}
+			}
+			state.Tabindex++
+			state.attributeTabs.push(tag)
+		},
 		back(state){
 			state.TabsValue="1"
 		},
@@ -57,6 +79,13 @@ const store = createStore({
 			for(let i=1;i<state.Tabs.length+1;i++){
 				if(target.targetName == state.Tabs[i-1].name){
 					state.Tabs.splice(i-1,1)
+				}
+			}
+		},
+		removeAttributeTab(state,target){
+			for(let i=1;i<state.attributeTabs.length+1;i++){
+				if(target.targetName == state.attributeTabs[i-1].name){
+					state.attributeTabs.splice(i-1,1)
 				}
 			}
 		},

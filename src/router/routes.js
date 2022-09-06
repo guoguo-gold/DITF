@@ -36,10 +36,22 @@ const routes = [
 		component:() => import("../views/tools.vue"),
 		children: [
 			{
-				// 当 /user/:id/profile 匹配成功
-				// UserProfile 将被渲染到 User 的 <router-view> 内部
 				path: 'PDF',
 				component:() => import("../components/Merg2PDF.vue"),
+			},
+			{
+				path: 'attribute',
+				component:() => import("../components/attribute/attribute.vue"),
+				children: [
+					{
+						path: 'index',
+						component:() => import("../components/attribute/index.vue")
+					},
+					{
+						path: 'char',
+						component:() => import("../components/attribute/char.vue")
+					}
+				]
 			},
 		],
 	},

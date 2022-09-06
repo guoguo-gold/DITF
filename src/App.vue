@@ -3,6 +3,7 @@
     <template v-slot:v1></template>
     <template v-slot:v2></template>
 	</navbian>
+  <div class="background-img"></div>
   <el-scrollbar style="height:calc(100vh - 56px)">
     <lay-notice-bar leftIcon="layui-icon-mute" rightIcon="layui-icon-close" text="项目正在开发中。。。" mode="closeable" background="#ecf5ff"	></lay-notice-bar>
     <div class="app_box">
@@ -21,4 +22,10 @@
 </script>
 
 <style scoped>
+.background-img{
+  position: absolute;
+  height: calc(100vh - 56px);
+  width: 100vw;
+  /*background-image: url("./assets/keli.jpeg");*/
+}
 </style>

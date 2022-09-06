@@ -44,13 +44,15 @@
         <el-steps
             direction="vertical"
             :space="100"
-            :active="3"
+            :active="4"
         >
           <el-step title="2022-8-22" description="更新"/>
           <el-step title="2022-8-22" description="更新"/>
           <el-step title="2022-8-22" description="更新考据"/>
           <el-step title="2022-8-22" description="更新原神wiki"/>
-          <el-step title="???" description="更新原神工具"/>
+          <el-step title="2022-9-5" description="更新原神角色属性模拟器工具"/>
+          <el-step title="???" description="美化首页"/>
+          <el-step title="???" description="美化nav菜单"/>
           <el-step title="???" description="更新考据"/>
         </el-steps>
       </div>

@@ -13,7 +13,7 @@
 		<div class="swiper-wrapper">
 			<div class="swiper-slide slide1" data-hash="index">
         <div class="slide-box" style="left: 100px">
-				  <div class="title" data-swiper-parallax="-100" style="font-size:35px">欢迎使用本产品！</div>
+				  <div class="title" data-swiper-parallax="-100" style="font-size:35px">欢迎！</div>
         </div>
 			</div>
 			<div class="swiper-slide slide2" data-hash="index">

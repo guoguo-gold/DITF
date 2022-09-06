@@ -14,7 +14,7 @@
             <el-icon><img class="cover" style="width:100%" src="/src/assets/IMG_202208199610_png.png" /></el-icon>
             <span>原神工具</span>
           </template>
-          <el-menu-item index="1-1">角色属性计算器</el-menu-item>
+          <el-menu-item index="/document/attribute/index">角色属性模拟器</el-menu-item>
           <el-menu-item index="1-2">圣遗物搭配</el-menu-item>
         </el-sub-menu>
         <el-sub-menu index="2">

@@ -27,13 +27,13 @@
 </template>
 <script lang="ts" setup>
 import {computed, onDeactivated, onMounted, onUpdated, ref, watch} from 'vue'
-import router from '../router'
+import router from '../../router'
 import {useStore} from 'vuex'
 import {ElNotification} from "element-plus";
 const store = useStore()
 const loading = ref(true)
-const editableTabsValue = ref(String(store.state.TabsValue))
-const editableTabs = store.state.Tabs
+const editableTabsValue = ref(String(store.state.TabsValue))   //记录当前的tag序号
+const editableTabs = store.state.attributeTabs
 /*let good = setTimeout(()=>{
   loading.value = true
 },2000)*/
@@ -42,7 +42,7 @@ onMounted(()=>{
 })
 
 const go_back = () => {   //返回到首页
-  router.push('/wiki/character/index');
+  router.push('/document/attribute/index');
   store.commit("back");
   editableTabsValue.value = "1"
 }
@@ -50,37 +50,36 @@ const go_back = () => {   //返回到首页
   console.log(to)
 })*/
 const removeTab = (targetName: string) =>{    //移除Tag
-  store.commit("removeTab",{
+  store.commit("removeAttributeTab",{
     targetName:targetName
   })
 }
 const route = (pane: string)=>{
   if(pane.props.label!="首页"){
-    $.ajax({
-      type:'get', //请求方式
-      url:"http://127.0.0.1/DITF/character.php",  //请求地址
-      data:{
-        name:pane.props.label
-      },
-      dataType:"json",
-      success:function(msg){
-        store.commit("char_translate",msg)
-      },
-      error:function(msg){
-        ElNotification({
-          type: 'error',
-          message: msg.responseText ? msg.responseText:"获取数据库失败",
-        })
-        router.push('/wiki/character/index');
-        editableTabsValue.value = "1"
-      }
-    }).then(()=>{router.push("/wiki/character/char?c="+pane.props.label)})
+ /* $.ajax({
+    type:'get', //请求方式
+    url:"http://127.0.0.1/DITF/character.php",  //请求地址
+    data:{
+      name:pane.props.label
+    },
+    dataType:"json",
+    success:function(msg){
+      store.commit("char_translate",msg)
+    },
+    error:function(msg){
+      ElNotification({
+        type: 'error',
+        message: msg.responseText ? msg.responseText:"获取数据库失败",
+      })
+    }
+    }).then(()=>{router.push("/wiki/character/char?c="+pane.props.label)})*/
+    router.push("/document/attribute/char?c="+pane.props.label)
   }
   else{
-    router.push("/wiki/character/index")
+    router.push("/document/attribute/index")
   }
 }
-router.push('/wiki/character/index');
+router.push('/document/attribute/index');
 </script>
 <style scoped>
 .box{

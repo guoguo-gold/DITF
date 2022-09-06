@@ -16,17 +16,11 @@
       </div>
 <!--轮播图-->
       <lay-carousel v-model="active1">
-        <lay-carousel-item id="1">
-          <lay-empty description="暂无图片"></lay-empty>
-        </lay-carousel-item>
-        <lay-carousel-item id="2">
-          <lay-empty description="暂无图片"></lay-empty>
-        </lay-carousel-item>
-        <lay-carousel-item id="3">
-          <lay-empty description="暂无图片"></lay-empty>
-        </lay-carousel-item>
-        <lay-carousel-item id="4">
-          <lay-empty description="暂无图片"></lay-empty>
+        <lay-carousel-item v-for="src in swiper_img" :id="src.id">
+          <lay-empty v-if="!src.url" ></lay-empty>
+          <template v-else>
+            <img :src=src.url />
+          </template>
         </lay-carousel-item>
       </lay-carousel>
 <!--content-->
@@ -69,7 +63,10 @@
 <script setup>
 import {nextTick,onMounted, ref, watch} from 'vue'
 import {ElNotification} from "element-plus";
+const count = ref(0)
 const value = ref("0")
+//轮播图
+const swiper_img = ref([])
 //版本下拉框菜单
 const edition = ref([])
 //菜单下拉框
@@ -90,8 +87,12 @@ const getGame = (item)=>{
     },
     dataType:"json",
     success:function(msg){
+      count.value = 0
+      edition.value = []
+      swiper_img.value = []
       let arr = msg.edition.split(",")
       let is_new = msg.isnew_edition.split(",")
+      let img = msg.swiperurl.split(",")
       for(let i in arr){
         let a
         if(is_new[i].length == 5){
@@ -100,6 +101,7 @@ const getGame = (item)=>{
         else{
           a = true
         }
+        swiper_img.value.push({id:String(count.value+=1),url:"/src/assets/"+img[i]})
         edition.value.push({title:arr[i],isnew:a})
       }
     },
@@ -109,6 +111,9 @@ const getGame = (item)=>{
         message: msg.responseText ? msg.responseText:"获取数据库失败",
       })
       value.value = 0
+      edition.value = []
+      swiper_img.value = [{id:1,url:"../assets/swiper1.jpeg"}]
+      console.log(swiper_img.value[0])
     }
   })
 }
@@ -307,5 +312,13 @@ onMounted(()=>{
   }
   .evaluate{
     width: 100%;
+  }
+  .layui-carousel img{
+    width: 100%;
+  }
+  .edition_id{
+    width: 100px;
+    line-height: 38px;
+    text-align: center;
   }
 </style>
